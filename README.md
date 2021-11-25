@@ -8,6 +8,10 @@
 
 * [psutil](https://pypi.org/project/psutil/) - psutil is a cross-platform library for retrieving information on running processes and system utilization
 
+## Демо ##
+
+https://vxpanel.herokuapp.com/page - DEMO
+
 ## Скрины ##
 
 ### Login page
