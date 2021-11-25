@@ -1,0 +1,8 @@
+werkzeug
+fastapi
+gunicorn
+requests
+starlette
+uvicorn
+jinja2
+psutil
