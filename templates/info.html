@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <script src="https://www.google.com/jsapi"></script>
+    <script>
+        google.load("visualization", "1", {packages:["corechart"]});
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+            ['Name', '%'],
+            ['used', {{ data.disk.used }}],
+            ['free', {{ data.disk.free }}]
+            ]);
+        var options = {
+            title: 'Disk',
+            is3D: true,
+            pieResidueSliceLabel: 'Остальное'
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('disk'));
+            chart.draw(data, options);
+        }
+    </script>
+    <script>
+        google.load("visualization", "1", {packages:["corechart"]});
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+            ['Name', '%'],
+            ['used', {{ data.memory.used }}],
+            ['free', {{ data.memory.free }}]
+            ]);
+        var options = {
+            title: 'Memory',
+            is3D: true,
+            pieResidueSliceLabel: 'Остальное'
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('mem'));
+            chart.draw(data, options);
+        }
+    </script>
+    <script>
+        google.load("visualization", "1", {packages:["corechart"]});
+        google.setOnLoadCallback(drawChart);
+        function drawChart() {
+            var data = google.visualization.arrayToDataTable([
+            ['Name', '%'],
+            ['used', {{ data.cpu.used }}],
+            ['free', {{ data.cpu.free }}]
+            ]);
+        var options = {
+            title: 'CPU',
+            is3D: true,
+            pieResidueSliceLabel: 'Остальное'
+        };
+        var chart = new google.visualization.PieChart(document.getElementById('cpu'));
+            chart.draw(data, options);
+        }
+    </script>
+    <header>
+        <div class="left"><img src="static/menu.png"> VXpanel </div>
+        <div class="right">Admin</div>
+    </header>
+    <div class="menu">
+        <div><a href="/page">Main</a></div>
+        <div><a href="/ssh">SSH</a></div>
+        <div><a href="/logs">Logs</a></div>
+        <div class="checked"><a href="/info">Info</a></div>
+        <div><a href="/settings">Settings</a></div>
+    </div>
+    <div class="main">
+        <div class="d">
+            <section class="href">Project / Info</section>
+            <div id="disk" style="width: 100%; height: 400px;"></div>
+            <div id="mem" style="width: 100%; height: 400px;"></div>
+            <div id="cpu" style="width: 100%; height: 400px;"></div>
+        </div>
+    </div>
+{% endblock content %}

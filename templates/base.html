@@ -1,0 +1,135 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>VXpanel</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            font-family: 'Roboto',sans-serif;
+            box-sizing: border-box;
+        }
+        html, body {
+            margin: 0;
+            padding: 0;
+        }
+        header {
+            width: 100%;
+            height: 63px;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            border-bottom: 1px solid rgb(221, 225, 229);
+            background-color: white;
+            z-index: 9999999999;
+        }
+        header div {
+            display: inline-block;
+        }
+        header div img {
+            cursor: pointer;
+            width: 35px;
+            margin: 17px;
+            vertical-align: middle;
+        }
+        a {
+            text-decoration: none;
+        }
+        .leftup {
+            margin-left: 20px;
+            display: block;
+        }
+        .leftup p {
+            margin-top: 5px;
+            margin-bottom: 5px;
+            display: block;
+        }
+        .right {
+            width: calc(100% - 150px);
+            text-align: right;
+        }
+        .menu div {
+            display: inline-block;
+            margin-left: 30px;
+        }
+        .menu div a {
+            color: #62738d;
+        }
+        .menu div a:hover {
+            color: #4268F6;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #4268F6;
+        }
+        .menu .checked a {
+            color: #4268F6;
+            padding-bottom: 20px;
+            border-bottom: 1px solid #4268F6;
+        }
+        .menu {
+            margin-top: 100px;
+            margin-bottom: 20px;
+            padding: 20px 0px 20px 0px;
+            width: 100%;
+            border-top: 1px solid rgb(218, 218, 218);
+            border-bottom: 1px solid rgb(218, 218, 218);
+        }
+        .href {
+            margin-left: 50px;
+            color: rgb(192, 192, 202);
+            line-height: 16px;
+            font-size: 18px;
+            text-decoration: none;
+        }
+        .main, .logs {
+            text-align: center;
+        }
+        .main .d {
+            text-align: left;
+            width: 60%;
+            border-radius: 10px;
+            box-shadow: 0 15px 24px 0 rgba(137,138,154,0.45);
+            padding: 20px;
+            margin: 20px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        .logs div {
+            text-align: left;
+            width: 70%;
+            border-radius: 10px;
+            box-shadow: 0 15px 24px 0 rgba(137,138,154,0.45);
+            padding: 20px;
+            margin: 20px;
+            display: inline-block;
+            vertical-align: top;
+        }
+        p {
+            width: fit-content;
+            display: inline-block;
+        }
+        .st {
+            display: inline-block;
+            width: 15px;
+            height: 15px;
+            border-radius: 50%;
+            vertical-align: middle;
+            background-color: greenyellow;
+            margin-right: 10px;
+        }
+        .high {background-color: red;}
+        .middle {background-color: yellow;}
+        main {
+            padding-left: 100px;
+            padding-right: 100px;
+        }
+        @media screen and (max-width: 800px) {.main .d {width: 90%;}}
+        
+    </style>
+</head>
+<body>
+    {% block content %}
+        This is content
+    {% endblock %}
+</body>
+</html>

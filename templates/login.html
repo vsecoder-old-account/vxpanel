@@ -1,0 +1,141 @@
+<!DOCTYPE HTML>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style>
+        * {
+            font-family: 'Roboto',sans-serif;
+            box-sizing: border-box;
+        }
+        div {
+            display: inline-block;
+        }
+        .center {
+            margin: 0 auto;
+            vertical-align: middle;
+        }
+        .login {
+            width: 600px;
+            background: white;
+            display: block;
+            height: 440px;
+            width: 66.66666666666666%;
+            box-shadow: 0 15px 24px 0 rgba(137,138,154,0.45);
+            margin-top: 22%;
+        }
+        .blue {
+            background: #4268F6;
+        }
+        .error {
+            padding: 12px;
+            margin: 5px;
+            background-color: #FFA5B5;
+            color: #454655;
+            box-shadow: 0 2px 0 0 #FF4567;
+        }
+        .info, .form {
+            width: 49%;
+            padding: 48px;
+            height: 100%;
+        }
+        .info {
+            padding: auto;
+            float: left;
+            color: white;
+            font-size: 14px;
+            font-weight: 100;
+            line-height: 24px;
+            text-align: center;
+        }
+        .info h2 {
+            font-weight: 200;
+            font-size: 32px;
+        }
+        label {
+            font-size: 12px;
+            line-height: 16px;
+        }
+        label::before {
+            content: "*";
+            color: #4268F6;
+            margin-right: 4px;
+        }
+        input {
+            width: 100%;
+            display: block;
+            border: 1px solid #898A9A;
+            font-size: 14px;
+            line-height: 24px;
+            padding-left: 8px;
+            padding-right: 8px;
+            padding-top: 4px;
+            padding-bottom: 4px;
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+        button {
+            line-height: 24px;
+            vertical-align: middle;
+            border: 1px solid #4268F6;
+            font-size: 14px;
+            background-color: #4268F6;
+            text-align: center;
+            margin-top: 10px;
+            padding: 4px 32px;
+            color: #fff;
+        }
+        button:hover {
+            background: #535B8E;
+            border-color: #535B8E;
+        }
+        .sad {
+            margin-top: -20px;
+        }
+        .text-center {
+            text-align: center;
+            max-width: 250px;
+        }
+        .logo {
+            display: block;
+            margin-bottom: 60px;
+        }
+        @media screen and (max-width: 800px) {
+            .login {
+                width: 70%;
+            }
+            .info, .form {
+                padding: 28px;
+                width: 100%;
+            }
+            .info {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+    <main>
+        <div class="center login">
+            <div class="blue info">
+                <h2 style="text-align: left;">Welcome</h2>
+                <p style="text-align: left;">Панель для хостинга с удобным и прогресивным интерфейсом в несколько кликов!</p>
+                <div class="text-center">
+                    <img src="static/1.svg">
+                    <img src="static/2.svg">
+                    <img src="static/3.svg" class="sad">
+                </div>
+            </div>
+            <div class="form">
+                <img src="static/menu.png" class="logo">
+                <!-- <section class="error">Invalid password or login </section>-->
+                <label required="true">Name:</label>
+                <input type="text" placeholder="admin" required="true">
+                <label required="true">Password:</label>
+                <input type="password" placeholder="admin" required="true">
+                <button type="submit">Login</button>
+            </div>
+        </div>
+    </main>
+</body>

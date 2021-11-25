@@ -1,0 +1,45 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <header>
+        <div class="left"><img src="static/menu.png"> VXpanel </div>
+        <div class="right">Admin</div>
+    </header>
+    <div class="menu">
+        <div class="checked"><a href="/page">Main</a></div>
+        <div><a href="/ssh">SSH</a></div>
+        <div><a href="/logs">Logs</a></div>
+        <div><a href="/info">Info</a></div>
+        <div><a href="/settings">Settings</a></div>
+    </div>
+    <div class="main">
+        <div class="d">
+            <section class="href">Project / Statistic</section>
+            <info class="st {{ data.status.cpu }}"> </info><p>CPU: <span>{{ data.cpu.percent }}%</span> / 100%</p><br>
+            <info class="st {{ data.status.memory }}"> </info><p>Memory:</p><br>
+                <memory class="leftup">
+                    <p> Total: <span>{{ data.memory.used }} MiB</span></p>
+                    <p> Avaliable: <span>{{ data.memory.avaliable }} MiB</span></p>
+                    <p> Used: <span>{{ data.memory.used }} MiB</span></p>
+                    <p> Free: <span>{{ data.memory.free }} MiB</span></p>
+                    <p> Active: <span>{{ data.memory.active }} MiB</span></p>
+                    <p> Inactive: <span>{{ data.memory.inactive }} MiB</span></p>
+                    <p> Cached: <span>{{ data.memory.cached }} MiB</span></p>
+                    <p> Buffers: <span>{{ data.memory.buffers }} MiB</span></p>
+                    <p> Shared: <span>{{ data.memory.shared }} MiB</span></p>
+                    <p> Percent: <span>{{ data.memory.percent }}%</span></p>
+                </memory>
+            <!--<info class="st norm"> </info><p>Internet: <span>0Kib/s</span></p><br>-->
+            <info class="st {{ data.status.disk }}"> </info>
+                <p>Disk: <span>{{ data.disk.used }}</span> / {{ data.disk.total }} MiB</p><br>
+                <memory class="leftup">
+                    <p> Free: <span>{{ data.memory.free }} MiB</span></p>
+                    <p> Percent: <span>{{ data.memory.percent }}%</span></p>
+                </memory>
+        </div>
+        <div class="d">
+            <section class="href">Project / SSH</section>
+            <info class="st norm"> </info><p>ssh root@<span>...</span> -p ...</p>
+        </div>
+    </div>
+{% endblock content %}
