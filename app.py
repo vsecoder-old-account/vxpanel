@@ -7,7 +7,6 @@ from starlette.templating import Jinja2Templates
 from starlette.responses import Response
 
 import os
-import pathlib
 import json
 import psutil
 import datetime
