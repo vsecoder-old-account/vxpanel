@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <header>
+        <div class="left"><img src="../static/menu.png"> VXpanel </div>
+        <div class="right">Admin</div>
+    </header>
+    <div class="menu">
+        <div><a href="/page">Main</a></div>
+        <div><a href="/ssh">SSH</a></div>
+        <div><a href="/logs">Logs</a></div>
+        <div><a href="/info">Info</a></div>
+        <div class="checked"><a href="/settings">Settings</a></div>
+    </div>
+    <div class="main">
+        <div class="d">
+            <div class="mobile">Телефон не поддерживает нормальное отображение логов!</div>
+            <!--<pre><code class="language"></code></pre>-->
+            <textarea>Тут будет поле с настройками сервера и панели</textarea>
+        </div>
+    </div>
+{% endblock content %}

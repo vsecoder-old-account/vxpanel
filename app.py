@@ -2,6 +2,7 @@
 import uvicorn
 from fastapi import FastAPI
 from fastapi import Request
+#from fastapi import WebSocket
 from fastapi.staticfiles import StaticFiles
 from starlette.templating import Jinja2Templates
 from starlette.responses import Response
@@ -107,11 +108,11 @@ def home_page(request: Request):
     return templates.TemplateResponse('login.html', {'request': request})
 
 @app.get('/page')
-def panel_page(request: Request):
+def panel_page1(request: Request):
     return templates.TemplateResponse('index.html', {'request': request, 'data': stat()})
 
 @app.get('/info')
-def panel_page(request: Request):
+def panel_page2(request: Request):
     return templates.TemplateResponse('info.html', {'request': request, 'data': stat()})
 
 @app.get('/logs')
@@ -119,19 +120,19 @@ def logs_page(request: Request):
     return templates.TemplateResponse('logs.html', {'request': request, 'data': test()})
 
 @app.get('/settings')
-def panel_page(request: Request):
-    return 'In dev'
+def panel_page3(request: Request):
+    return templates.TemplateResponse('settings.html', {'request': request, 'data': test()})
 
 @app.get('/ssh')
-def panel_page(request: Request):
-    return 'In dev'
+def panel_page4(request: Request):
+    return templates.TemplateResponse('ssh.html', {'request': request, 'data': test()})
 
 @app.get('/api')
-def panel_page(request: Request):
+def panel_page5(request: Request):
     return stat()
 
 @app.get('/test')
-def panel_page(request: Request):
+def panel_page6(request: Request):
     return test()
 
 # Start server
