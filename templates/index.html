@@ -3,7 +3,7 @@
 {% block content %}
     <header>
         <div class="left"><img src="static/menu.png"> VXpanel </div>
-        <div class="right">Admin</div>
+        <div class="right">{{ data.system }}</div>
     </header>
     <div class="menu">
         <div class="checked"><a href="/page">Main</a></div>
@@ -15,10 +15,12 @@
     <div class="main">
         <div class="d">
             <section class="href">Project / Statistic</section>
+            <info class="st normal"> </info><p>System: <span>{{ data.system }} {{ data.release }} <!--{{ data.version }}--></span></p><br>
+            <info class="st normal"> </info><p>Uptime: <span>{{ data.uptime }}</span></p><br>
             <info class="st {{ data.status.cpu }}"> </info><p>CPU: <span>{{ data.cpu.percent }}%</span> / 100%</p><br>
-            <info class="st {{ data.status.memory }}"> </info><p>Memory:</p><br>
+            <info class="st {{ data.status.memory }}"> </info><p>Memory: <span>{{ data.memory.used }}</span> / {{ data.memory.total }} MiB</p><br>
                 <memory class="leftup">
-                    <p> Total: <span>{{ data.memory.used }} MiB</span></p>
+                    <p> Total: <span>{{ data.memory.total }} MiB</span></p>
                     <p> Avaliable: <span>{{ data.memory.avaliable }} MiB</span></p>
                     <p> Used: <span>{{ data.memory.used }} MiB</span></p>
                     <p> Free: <span>{{ data.memory.free }} MiB</span></p>
@@ -29,7 +31,7 @@
                     <p> Shared: <span>{{ data.memory.shared }} MiB</span></p>
                     <p> Percent: <span>{{ data.memory.percent }}%</span></p>
                 </memory>
-            <!--<info class="st norm"> </info><p>Internet: <span>0Kib/s</span></p><br>-->
+            <info class="st norm"> </info><p>Internet: <span>{{ data.internet.bytes_sent }}Kib/s</span> / {{ data.internet.bytes_recv }}Kib/s</p><br>
             <info class="st {{ data.status.disk }}"> </info>
                 <p>Disk: <span>{{ data.disk.used }}</span> / {{ data.disk.total }} MiB</p><br>
                 <memory class="leftup">
@@ -39,7 +41,7 @@
         </div>
         <div class="d">
             <section class="href">Project / SSH</section>
-            <info class="st norm"> </info><p>ssh root@<span>...</span> -p ...</p>
+            <info class="st norm"> </info><p>ssh root@<span>{{ data.ip }}</span></p>
         </div>
     </div>
 {% endblock content %}

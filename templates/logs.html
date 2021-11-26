@@ -1,9 +1,6 @@
 {% extends "base.html" %}
 
 {% block content %}
-<script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/highlight.min.js" integrity="sha512-Pbb8o120v5/hN/a6LjF4N4Lxou+xYZ0QcVF8J6TWhBbHmctQWd8O6xTDmHpE/91OjPzCk4JRoiJsexHYg4SotQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/default.min.css" integrity="sha512-3xLMEigMNYLDJLAgaGlDSxpGykyb+nQnJBzbkQy2a0gyVKL2ZpNOPIj1rD8IPFaJbwAgId/atho1+LBpWu5DhA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
-<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/11.3.1/styles/a11y-light.min.css" integrity="sha512-WDk6RzwygsN9KecRHAfm9HTN87LQjqdygDmkHSJxVkVI7ErCZ8ZWxP6T8RvBujY1n2/E4Ac+bn2ChXnp5rnnHA==" crossorigin="anonymous" referrerpolicy="no-referrer" /><script>hljs.highlightAll();</script>
     <header>
         <div class="left"><img src="../static/menu.png"> VXpanel </div>
         <div class="right">Admin</div>
@@ -15,29 +12,11 @@
         <div><a href="/info">Info</a></div>
         <div><a href="/settings">Settings</a></div>
     </div>
-    <div class="logs">
-        <div>
-            <pre><code class="language-js">28-10-2021 15:32: - WEB:[INFO] - Web starting in 0.0.0.0:5000
-28-10-2021 15:32: - WEB:[INFO] - Page: "/" | 192.168.99.11
-28-10-2021 15:32: - WEB:[INFO] - Page: "/login" | 192.168.99.11
-28-10-2021 15:32: - WEB:[INFO] - Page: "/login" | 192.168.99.11
-28-10-2021 15:32: - WEB:[INFO] - Admin login: 192.168.99.11
-28-10-2021 15:32: - WEB:[INFO] - Page: "/" | 192.168.99.11
-28-10-2021 15:32: - WEB:[INFO] - Page: "/sessions" | 192.168.99.11
-28-10-2021 15:34: - WEB:[INFO] - Web stoping
-28-10-2021 15:34: - WEB:[INFO] - Web starting in 0.0.0.0:5000
-28-10-2021 15:34: - WEB:[INFO] - Page: "/sessions" | 192.168.99.11
-28-10-2021 15:34: - WEB:[INFO] - Page: "/login" | 192.168.99.11
-28-10-2021 15:34: - WEB:[INFO] - Page: "/login" | 192.168.99.11
-28-10-2021 15:34: - WEB:[INFO] - Admin login: 192.168.99.11
-28-10-2021 15:34: - WEB:[INFO] - Page: "/" | 192.168.99.11
-28-10-2021 15:34: - WEB:[INFO] - Page: "/sessions" | 192.168.99.11
-28-10-2021 15:34: - WEB:[INFO] - Page: "/logs" | 192.168.99.11
-28-10-2021 15:34: - WEB:[INFO] - Page: "/" | 192.168.99.11
-28-10-2021 15:34: - WEB:[INFO] - Page: "/script" | 192.168.99.11
-28-10-2021 15:35: - WEB:[INFO] - Page: "/script" | 192.168.99.11
-28-10-2021 15:35: - WEB:[ERROR] - 500
-28-10-2021 15:35: - WEB:[INFO] - Web stoping</code></pre>
+    <div class="main">
+        <div class="d">
+            <div class="mobile">Телефон не поддерживает нормальное отображение логов!</div>
+            <!--<pre><code class="language"></code></pre>-->
+            <textarea>{{data}}</textarea>
         </div>
     </div>
 {% endblock content %}

@@ -5,8 +5,14 @@
     <title>VXpanel</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <style>
+        @font-face {   
+            font-family: 'GoogleSans';
+            src: url('../static/font/GoogleSans-Regular.ttf') format('truetype');
+                font-weight: normal;
+                font-style: normal;
+        }
         * {
-            font-family: 'Roboto',sans-serif;
+            font-family: 'GoogleSans', sans-serif;
             box-sizing: border-box;
         }
         html, body {
@@ -48,6 +54,7 @@
         .right {
             width: calc(100% - 150px);
             text-align: right;
+            padding-right: 10px;
         }
         .menu div {
             display: inline-block;
@@ -67,7 +74,7 @@
             border-bottom: 1px solid #4268F6;
         }
         .menu {
-            margin-top: 100px;
+            margin-top: 60px;
             margin-bottom: 20px;
             padding: 20px 0px 20px 0px;
             width: 100%;
@@ -90,7 +97,6 @@
             border-radius: 10px;
             box-shadow: 0 15px 24px 0 rgba(137,138,154,0.45);
             padding: 20px;
-            margin: 20px;
             display: inline-block;
             vertical-align: top;
         }
@@ -123,8 +129,23 @@
             padding-left: 100px;
             padding-right: 100px;
         }
-        @media screen and (max-width: 800px) {.main .d {width: 90%;}}
-        
+        .mobile {
+            display: none;
+            padding: 12px;
+            margin: 5px;
+            background-color: #FFA5B5;
+            color: #454655;
+            box-shadow: 0 2px 0 0 #FF4567;
+        }
+        @media screen and (max-width: 800px) {
+            .main .d {width: 90%;}
+            .mobile {display: block;}
+        }
+        textarea {
+            width: 100%;
+            min-height: 600px;
+            border: none;
+        }
     </style>
 </head>
 <body>
