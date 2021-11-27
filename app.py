@@ -30,35 +30,35 @@ def index():
 
 @app.route("/page", methods=['GET', 'POST'])
 def page():
-    if current_user.is_authenticated:
+    if current_user:
 	    return render_template('index.html', data=stat())
     else:
         return render_template('login.html')
 
 @app.route("/info", methods=['GET', 'POST'])
 def info():
-    if current_user.is_authenticated:
+    if current_user:
 	    return render_template('info.html', data=stat())
     else:
         return render_template('login.html')
 
 @app.route("/logs", methods=['GET', 'POST'])
 def logs():
-    if current_user.is_authenticated:
+    if current_user:
 	    return render_template('logs.html', data=stat())
     else:
         return render_template('login.html')
 
 @app.route("/settings", methods=['GET', 'POST'])
 def settings():
-    if current_user.is_authenticated:
+    if current_user:
 	    return render_template('settings.html', data=stat())
     else:
         return render_template('login.html')
 
 @app.route("/ssh", methods=['GET', 'POST'])
 def ssh():
-    if current_user.is_authenticated:
+    if current_user:
 	    return render_template('ssh.html', data=stat())
     else:
         return render_template('login.html')
