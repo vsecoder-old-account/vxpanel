@@ -1,155 +1,108 @@
-#!/usr/bin/python
-import uvicorn
-from fastapi import FastAPI
-from fastapi import Request
-#from fastapi import WebSocket
-from fastapi.staticfiles import StaticFiles
-from starlette.templating import Jinja2Templates
-from starlette.responses import Response
+from flask import Flask
+from flask import render_template, flash
+from flask import redirect, url_for
+from flask import request, jsonify
+from flask_login import LoginManager, login_required
+from flask_login import login_user, current_user
+from flask_login import logout_user, UserMixin
+from api import *
+import os, json
 
-import os
-import psutil
-import datetime
-import platform
-import contextlib
-import time
-import socket
-#import speedtest
+app = Flask(__name__)
+app.config['SECRET_KEY'] = os.urandom(24).hex()
 
-# Create server
-app = FastAPI()
-templates = Jinja2Templates('templates')
-app.mount("/static", StaticFiles(directory="static"), name="static")
+login_manager = LoginManager(app)
+login_manager.login_view = 'login_page'
 
-def stat():
-    mem = psutil.virtual_memory()
-    active_since = datetime.datetime.fromtimestamp(psutil.boot_time())
-    cpu = psutil.cpu_percent()
-    internet = psutil.net_io_counters()
-    #st = speedtest.Speedtest()
+class User(UserMixin):
+    username = 'admin'
+    password = 'admin'
+    is_active = ''
 
-    status_cpu = 'normal'
-    if cpu > 70: status_cpu = 'high'
-    elif cpu > 30: status_cpu = 'middle'
-    else: status_cpu = 'normal'
-    
-    status_memory = 'normal'
-    if mem.percent > 70: status_memory = 'high'
-    elif mem.percent > 30: status_memory = 'middle'
-    else: status_memory = 'normal'
-    
-    status_disk = 'normal'
-    if psutil.disk_usage('/').percent > 70: status_disk = 'high'
-    elif psutil.disk_usage('/').percent > 30: status_disk = 'middle'
-    else: status_disk = 'normal'
+@login_manager.user_loader
+def load_user(username):
+    if User.username == username:
+        return User
 
-    data = {
-        'ip': socket.gethostbyname(socket.getfqdn()),
-        'uptime': datetime.datetime.now() - active_since,
-        'system': platform.system(),
-        'release': platform.release(),
-        'version': platform.version(),
-        'cpu': {
-            'used': psutil.cpu_count() / 100 * cpu,
-            'free': psutil.cpu_count() - psutil.cpu_count() / 100 * cpu,
-            'percent': cpu
-        },
-        'memory': {
-            'total': round(mem.total / 1024 / 1024),
-            'avaliable': round(mem.available / 1024 / 1024),
-            'used': round(mem.used / 1024 / 1024),
-            'free': round(mem.free / 1024 / 1024),
-            'active': round(mem.active / 1024 / 1024),
-            'inactive': round(mem.inactive / 1024 / 1024),
-            'cached': round(mem.cached / 1024 / 1024),
-            'buffers': round(mem.buffers / 1024 / 1024),
-            'shared': round(mem.shared / 1024 / 1024),
-            'percent': mem.percent
-        },
-        'disk': {
-            'total': round(psutil.disk_usage('/').total / 1024 / 1024),
-            'used': round(psutil.disk_usage('/').used / 1024 / 1024),
-            'free': round(psutil.disk_usage('/').free / 1024 / 1024),
-            'percent': psutil.disk_usage('/').percent
-        },
-        'status': {
-            'cpu': status_cpu,
-            'memory': status_memory,
-            'disk': status_disk
-        },
-        'internet': {
-            #'upload': st.upload(),
-            #'donwload': st.donwload(),
-            #'ping': st.ping(),
-            'bytes_sent': internet.bytes_sent,
-            'bytes_recv': internet.bytes_recv,
-            'packets_sent': internet.packets_sent,
-            'packets_recv': internet.packets_recv,
-            'errin': internet.errin,
-            'errout': internet.errout,
-            'dropin': internet.dropin,
-            'dropout': internet.dropout
-        }
-    }
-    return data
+@app.route("/", methods=['GET', 'POST'])
+def index():
+	return render_template('login.html')
 
-def test():
-    with open("test.txt", 'a') as fout, contextlib.redirect_stdout(fout):
-        psutil.test()
-    f = open("test.txt", 'r')
-    test = f.read()
-    f.close()
-    os.remove("test.txt")
-    return test
+@app.route("/page", methods=['GET', 'POST'])
+def page():
+    if current_user.is_authenticated:
+	    return render_template('index.html', data=stat())
+    else:
+        return render_template('login.html')
 
-# Server home page
-@app.get('/')
-def home_page(request: Request):
-    return templates.TemplateResponse('login.html', {'request': request})
+@app.route("/info", methods=['GET', 'POST'])
+def info():
+    if current_user.is_authenticated:
+	    return render_template('info.html', data=stat())
+    else:
+        return render_template('login.html')
 
-@app.get('/page')
-def panel_page1(request: Request):
-    return templates.TemplateResponse('index.html', {'request': request, 'data': stat()})
+@app.route("/logs", methods=['GET', 'POST'])
+def logs():
+    if current_user.is_authenticated:
+	    return render_template('logs.html', data=stat())
+    else:
+        return render_template('login.html')
 
-@app.get('/info')
-def panel_page2(request: Request):
-    return templates.TemplateResponse('info.html', {'request': request, 'data': stat()})
+@app.route("/settings", methods=['GET', 'POST'])
+def settings():
+    if current_user.is_authenticated:
+	    return render_template('settings.html', data=stat())
+    else:
+        return render_template('login.html')
 
-@app.get('/logs')
-def logs_page(request: Request):
-    return templates.TemplateResponse('logs.html', {'request': request, 'data': test()})
+@app.route("/ssh", methods=['GET', 'POST'])
+def ssh():
+    if current_user.is_authenticated:
+	    return render_template('ssh.html', data=stat())
+    else:
+        return render_template('login.html')
 
-@app.get('/settings')
-def panel_page3(request: Request):
-    return templates.TemplateResponse('settings.html', {'request': request, 'data': test()})
+@app.route("/api", methods=['GET', 'POST'])
+def api():
+    return jsonify(stat())
 
-@app.get('/ssh')
-def panel_page4(request: Request):
-    return templates.TemplateResponse('ssh.html', {'request': request, 'data': test()})
+@app.route("/test", methods=['GET', 'POST'])
+def api2():
+    return jsonify(test())
 
-@app.get('/api')
-def panel_page5(request: Request):
-    return stat()
+@app.route('/login', methods=['GET', 'POST'])
+def login_page():
+	login = request.form.get('username')
+	password = request.form.get('password')
 
-@app.get('/test')
-def panel_page6(request: Request):
-    return test()
+	if login and password:
+		user = load_user(login)
+		if user:
+			login_user(user)
 
-# Start server
-if __name__ == "__main__":
-    # dev
-    uvicorn.run('app:app',
-        host="0.0.0.0", 
-        port=int(os.environ.get('PORT', False)),
-        log_level="debug",
-        http="h11",
-        reload=True,
-        use_colors=True,
-        workers=3
-    )
-    # prod
-    #uvicorn.run('app:app',
-    #    host="0.0.0.0", 
-    #    port=80,
-    #    http="h11"
-    #)
+			return redirect('/page')
+		else:
+			flash('Не верны Логин/Пароль')
+	else:
+		pass
+	return render_template('login.html')
+
+@app.route('/logout/')
+@login_required
+def logout():
+    logout_user()
+    flash("You have been logged out.")
+    return redirect(url_for('login_page'))
+
+@app.errorhandler(404)
+def not_found_error(error):
+    return '404'
+
+@app.errorhandler(500)
+def server_error(error):
+    return '500'
+
+if __name__ == '__main__':
+	port = int(os.environ.get("PORT", 8000))
+	app.run(host='0.0.0.0', port=port)

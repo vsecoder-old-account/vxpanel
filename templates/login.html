@@ -129,12 +129,16 @@
             </div>
             <div class="form">
                 <img src="static/menu.png" class="logo">
-                <!-- <section class="error">Invalid password or login </section>-->
-                <label required="true">Name:</label>
-                <input type="text" placeholder="admin" required="true">
-                <label required="true">Password:</label>
-                <input type="password" placeholder="admin" required="true">
-                <button type="submit">Login</button>
+                {% for msg in get_flashed_messages() %}
+                    <section class="error">{{msg}}</section>
+                {% endfor %}
+                <form action="/login" method="post">
+                    <label required="true">Name:</label>
+                    <input type="text" placeholder="admin" required="true" name="username" autofocus="">
+                    <label required="true">Password:</label>
+                    <input type="password" placeholder="admin" required="true" name="password">
+                    <button type="submit">Login</button>
+                </form>
             </div>
         </div>
     </main>

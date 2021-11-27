@@ -47,7 +47,7 @@
     <script>
         let result;
         function api() {
-            let response = fetch("/api/")
+            let response = fetch("/api")
                 .then(response => response.json())
                 .then(result => {
                     console.log(result);
