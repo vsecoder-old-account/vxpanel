@@ -1,8 +1,10 @@
 werkzeug
-fastapi
+flask
 gunicorn
 requests
 starlette
 uvicorn
 jinja2
 psutil
+python-multipart
+flask_login
