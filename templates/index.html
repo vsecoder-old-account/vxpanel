@@ -15,28 +15,28 @@
     <div class="main">
         <div class="d">
             <section class="href">Project / Statistic</section>
-            <info class="st normal"> </info><p>System: <span>{{ data.system }} {{ data.release }} <!--{{ data.version }}--></span></p><br>
-            <info class="st normal"> </info><p>Uptime: <span>{{ data.uptime }}</span></p><br>
-            <info class="st {{ data.status.cpu }}"> </info><p>CPU: <span>{{ data.cpu.percent }}%</span> / 100%</p><br>
-            <info class="st {{ data.status.memory }}"> </info><p>Memory: <span>{{ data.memory.used }}</span> / {{ data.memory.total }} MiB</p><br>
+            <info class="st normal"> </info><p><b>System:</b> <span id="area1">{{ data.system }} {{ data.release }} <!--{{ data.version }}--></span></p><br>
+            <info class="st normal"> </info><p><b>Uptime:</b> <span id="area2">{{ data.uptime }}</span></p><br>
+            <info class="st {{ data.status.cpu }}"> </info><p><b>CPU:</b> <span id="area3">{{ data.cpu.percent }}%</span> / 100%</p><br>
+            <info class="st {{ data.status.memory }}"> </info><p><b>Memory:</b> <span id="area4">{{ data.memory.used }} / {{ data.memory.total }}</span> MiB</p><br>
                 <memory class="leftup">
-                    <p> Total: <span>{{ data.memory.total }} MiB</span></p>
-                    <p> Avaliable: <span>{{ data.memory.avaliable }} MiB</span></p>
-                    <p> Used: <span>{{ data.memory.used }} MiB</span></p>
-                    <p> Free: <span>{{ data.memory.free }} MiB</span></p>
-                    <p> Active: <span>{{ data.memory.active }} MiB</span></p>
-                    <p> Inactive: <span>{{ data.memory.inactive }} MiB</span></p>
-                    <p> Cached: <span>{{ data.memory.cached }} MiB</span></p>
-                    <p> Buffers: <span>{{ data.memory.buffers }} MiB</span></p>
-                    <p> Shared: <span>{{ data.memory.shared }} MiB</span></p>
-                    <p> Percent: <span>{{ data.memory.percent }}%</span></p>
+                    <p> Total: <span id="area5">{{ data.memory.total }} MiB</span></p>
+                    <p> Avaliable: <span id="area6">{{ data.memory.avaliable }} MiB</span></p>
+                    <p> Used: <span id="area7">{{ data.memory.used }} MiB</span></p>
+                    <p> Free: <span id="area8">{{ data.memory.free }} MiB</span></p>
+                    <p> Active: <span id="area9">{{ data.memory.active }} MiB</span></p>
+                    <p> Inactive: <span id="area10">{{ data.memory.inactive }} MiB</span></p>
+                    <p> Cached: <span id="area11">{{ data.memory.cached }} MiB</span></p>
+                    <p> Buffers: <span id="area12">{{ data.memory.buffers }} MiB</span></p>
+                    <p> Shared: <span id="area13">{{ data.memory.shared }} MiB</span></p>
+                    <p> Percent: <span id="area14">{{ data.memory.percent }}%</span></p>
                 </memory>
-            <info class="st norm"> </info><p>Internet: <span>{{ data.internet.bytes_sent }}Kib/s</span> / {{ data.internet.bytes_recv }}Kib/s</p><br>
+            <info class="st norm"> </info><p><b>Internet:</b> <span id="area15">{{ data.internet.bytes_sent }}Kib/s / {{ data.internet.bytes_recv }}Kib/s</span></p><br>
             <info class="st {{ data.status.disk }}"> </info>
-                <p>Disk: <span>{{ data.disk.used }}</span> / {{ data.disk.total }} MiB</p><br>
+                <p><b>Disk:</b> <span id="area16">{{ data.disk.used }} / {{ data.disk.total }} MiB</span></p><br>
                 <memory class="leftup">
-                    <p> Free: <span>{{ data.disk.free }} MiB</span></p>
-                    <p> Percent: <span>{{ data.disk.percent }}%</span></p>
+                    <p> Free: <span id="area17">{{ data.disk.free }} MiB</span></p>
+                    <p> Percent: <span id="area18">{{ data.disk.percent }}%</span></p>
                 </memory>
         </div>
         <div class="d">
@@ -44,4 +44,34 @@
             <info class="st norm"> </info><p>ssh root@<span>{{ data.ip }}</span></p>
         </div>
     </div>
+    <script>
+        let result;
+        function api() {
+            let response = fetch("/api/")
+                .then(response => response.json())
+                .then(result => {
+                    console.log(result);
+                    area1.innerHTML = result.system + ' ' + result.release
+                    area2.innerHTML = result.uptime
+                    area3.innerHTML = result.cpu.percent + '%'
+                    area4.innerHTML = result.memory.used + ' / ' + result.memory.total + ''
+                    area5.innerHTML = result.memory.total + ' MiB'
+                    area6.innerHTML = result.memory.avaliable + ' MiB'
+                    area7.innerHTML = result.memory.used + ' MiB'
+                    area8.innerHTML = result.memory.free + ' MiB'
+                    area9.innerHTML = result.memory.active + ' MiB'
+                    area10.innerHTML = result.memory.inactive + ' MiB'
+                    area11.innerHTML = result.memory.cached + ' MiB'
+                    area12.innerHTML = result.memory.buffers + ' MiB'
+                    area13.innerHTML = result.memory.shared + ' MiB'
+                    area14.innerHTML = result.memory.percent + '%'
+                    area15.innerHTML =  result.internet.bytes_sent + ' Kib/s' + result.internet.bytes_recv + ' Kib/s'
+                    area16.innerHTML = result.disk.used + ' / ' + result.disk.total + ' MiB'
+                    area17.innerHTML = result.disk.free + ' MiB'
+                    area18.innerHTML = result.disk.percent + '%'
+                })
+            setTimeout(api, 2000)
+        }
+        api()
+    </script>
 {% endblock content %}
