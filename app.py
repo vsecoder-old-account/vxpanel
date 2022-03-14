@@ -24,10 +24,6 @@ def load_user(username):
     if User.username == username:
         return User
 
-@app.route("/login", methods=['GET', 'POST'])
-def index():
-	return render_template('login.html')
-
 @app.route("/", methods=['GET', 'POST'])
 def page():
     if current_user:
